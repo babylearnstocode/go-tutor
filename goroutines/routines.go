@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+var m = sync.Mutex{}
 var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
 var wg = sync.WaitGroup{}
 var results = []string{}
@@ -25,6 +26,8 @@ func dbCall(i int){
 	var delay float32 = 2000
 	time.Sleep((time.Duration(delay) * time.Millisecond))
 	fmt.Println("the result from the db is: ", dbData[i])
+  m.Lock()
 	results = append(results, dbData[i])
+	m.Unlock()
 	wg.Done()
 }
