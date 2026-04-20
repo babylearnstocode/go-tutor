@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main(){
+func run(){
 	var c = make(chan int, 5)
 	go process(c)
 	for i:= range c{
